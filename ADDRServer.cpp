@@ -1,6 +1,6 @@
-#include "ADDR.h"
+#include "ADDRServer.h"
 
-ADDR::ADDR() {
+ADDRServer::ADDRServer() {
 	//Проверка на загрузку библиотеки
 	if (WSAStartup(DLLVersion, &wsadata) != 0) {
 		cout << "Error 0...\nExit\n";
@@ -17,10 +17,9 @@ ADDR::ADDR() {
 
 }
 
-int ADDR::connection() {
+int ADDRServer::connection() {
 	newConnection = accept(sListen, (SOCKADDR*)&addr, &sizeofaddr); //Вовзращает указатель на новый сокет для общения с клиентом
 
-	//char msg[256] = "Hello Client!!! I'am server!\n";
 	if (newConnection == 0) {
 		cout << "Error 2...\n";
 		return 1;
@@ -30,6 +29,20 @@ int ADDR::connection() {
 		system("pause");
 		return 0;
 	}
-	//recv(newConnection, msg, sizeof(msg), NULL);
-	//send(newConnection, msg, sizeof(msg), NULL); //Отправка сообщения клиенту
+}
+
+void ADDRServer::sending(char* str) {
+	send(newConnection, str, sizeof(str), NULL); //Отправка сообщения клиенту
+}
+
+int ADDRServer::receivingint(int* a) {
+	char str[10];
+	if (recv(newConnection, str, sizeof(str), NULL)) {
+		*a = atoi(str);
+		cout << "------Receiving n = " << *a << " = " << str << endl;
+		system("pause");
+		return 0;
+	}
+	else
+		return 1;
 }
