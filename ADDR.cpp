@@ -14,6 +14,9 @@ ADDR::ADDR() {
 	newConnection = socket(AF_INET, SOCK_STREAM, NULL);
 }
 
+ADDR::~ADDR() {
+}
+
 int ADDR::connection() {
 	//Присоединение к серверу
 	if (connect(newConnection, (SOCKADDR*)&addr, sizeofaddr) != 0) {
@@ -25,7 +28,19 @@ int ADDR::connection() {
 		system("pause");
 		return 0;
 	}
+}
 
-	//recv(connection, msg, sizeof(msg), NULL);
-	//send(connection, msg1, sizeof(msg1), NULL);
+char* ADDR::receiving() {
+	char arr[7];
+	recv(newConnection, arr, sizeof(arr), NULL);
+	cout <<"Arr = "<< arr << endl;
+	return arr;
+}
+
+void ADDR::sendingint(int a) {
+	char buf[5];
+	itoa(a, buf, 10);
+	cout << "------Sending n = " << buf << " = " << a << endl;
+	system("pause");
+	send(newConnection, buf, sizeof(buf), NULL);
 }
