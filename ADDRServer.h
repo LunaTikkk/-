@@ -26,4 +26,7 @@ public:
 	int connection();
 	void sending(char* str);
 	int receivingint(int* a);
+	int receiving(char* a);
+	SOCKET getConnect();
+	void sendingint(int* a);
 };

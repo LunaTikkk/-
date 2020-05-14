@@ -23,6 +23,9 @@ public:
 	ADDR();
 	~ADDR();
 	int connection();
-	char* receiving();
+	int receiving(char *a);
+	int receivingint(int* a);
 	void sendingint(int a);
+	void sending(char a);
+	SOCKET getConnect();
 };

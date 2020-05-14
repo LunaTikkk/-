@@ -12,5 +12,6 @@ public:
 	void draw();
 	void setN(int a);
 	int* getN();
+	void changeMass(int* x, int* y, char* a);
 	void setup();
 };

@@ -2,10 +2,22 @@
 
 void Draw::draw() {
 	system("cls");
-
+	for (int i = 0; i < *N + 2; i++) {
+		if (i == 0 || i == *N + 1)
+			cout << " ";
+		else
+			cout << i;
+	}
+	cout << endl;
 	for (int i = 0; i < *N + 2; i++) {
 		for (int j = 0; j < *N + 2; j++) {
 			cout << Mass[i][j];
+			if (j == *N + 1) {
+				if (i == 0 || i == *N + 1)
+					cout << " ";
+				else
+					cout << i;
+			}
 		}
 		cout << endl;
 	}
@@ -21,6 +33,10 @@ int* Draw::getN() {
 	return N;
 }
 
+void Draw::changeMass(int* x, int* y, char* a) {
+	Mass[*x][*y] = *a;
+}
+
 void Draw::setup() {
 	for (int i = 0; i < *N + 2; i++) {
 		for (int j = 0; j < *N + 2; j++) {
@@ -33,6 +49,5 @@ void Draw::setup() {
 			else
 				Mass[i][j] = ' ';
 		}
-		cout << endl;
 	}
 }

@@ -25,22 +25,46 @@ int ADDR::connection() {
 	}
 	else {
 		cout << "Connected to Server!!!\n";
-		system("pause");
 		return 0;
 	}
 }
 
-char* ADDR::receiving() {
-	char arr[7];
-	recv(newConnection, arr, sizeof(arr), NULL);
-	cout <<"Arr = "<< arr << endl;
-	return arr;
+int ADDR::receiving(char* a) {
+	if (recv(newConnection, a, sizeof(a), NULL)) {
+		//cout << "------\nReceiving n = " << *a << " = " << *a << endl;
+		//system("pause");
+		return 0;
+	}
+	else
+		return 1;
+}
+
+int ADDR::receivingint(int* a) {
+	char str[10];
+	if (recv(newConnection, str, sizeof(str), NULL)) {
+		*a = atoi(str);
+		//cout << "------\nReceiving n = " << *a << " = " << str << endl;
+		//system("pause");
+		return 0;
+	}
+	else
+		return 1;
 }
 
 void ADDR::sendingint(int a) {
 	char buf[5];
 	itoa(a, buf, 10);
-	cout << "------Sending n = " << buf << " = " << a << endl;
-	system("pause");
+	//cout << "------\nSending n = " << buf << " = " << a << endl;
+	//system("pause");
 	send(newConnection, buf, sizeof(buf), NULL);
+}
+
+void ADDR::sending(char a) {
+	char A[5];
+	*A = a;
+	send(newConnection, A, sizeof(A), NULL); //Отправка сообщения клиенту
+}
+
+SOCKET ADDR::getConnect() {
+	return newConnection;
 }

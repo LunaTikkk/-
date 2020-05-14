@@ -32,17 +32,41 @@ int ADDRServer::connection() {
 }
 
 void ADDRServer::sending(char* str) {
-	send(newConnection, str, sizeof(str), NULL); //Отправка сообщения клиенту
+	char A[20];
+	strcpy_s(A, str);
+	system("pause");
+	send(newConnection, A, sizeof(A), NULL); //Отправка сообщения клиенту
 }
 
 int ADDRServer::receivingint(int* a) {
 	char str[10];
 	if (recv(newConnection, str, sizeof(str), NULL)) {
 		*a = atoi(str);
-		cout << "------Receiving n = " << *a << " = " << str << endl;
-		system("pause");
+		//cout << "------\nReceiving n = " << *a << " = " << str << endl;
+		//system("pause");
 		return 0;
 	}
 	else
 		return 1;
+}
+
+int ADDRServer::receiving(char* a) {
+	if (recv(newConnection, a, sizeof(a), NULL)) {
+		//cout << "------\nReceiving n = " << *a << " = " << *a << endl;
+		//system("pause");
+		return 0;
+	}
+	else
+		return 1;
+}
+
+SOCKET ADDRServer::getConnect() {
+	return newConnection;
+}
+
+void ADDRServer::sendingint(int* a) {
+	char buf[5];
+	itoa(*a, buf, 10);
+	//cout << "------\nSending n = " << buf << " = " << a << endl;
+	send(newConnection, buf, sizeof(buf), NULL);
 }
