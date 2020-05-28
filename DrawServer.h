@@ -9,10 +9,10 @@ private:
 	int* N = new int;
 	char Mass[20][20];
 public:
-	int* getN();
-	void setN(int a);
-	char* getMass(int i);
-	void changeMass(int* x, int* y, char* a);
-	void draw();
-	void setup();
+	DrawServer();			//Конструктор без параметров
+	~DrawServer();			//Деструктор
+	int* getN();			//Получение адреса размерности карты
+	void changeMass(int* x, int* y, char* a);	//Изменение карты для отрисовки
+	void draw();			//Отрисовка карты
+	void setup();			//Установка начальных значений карты
 };

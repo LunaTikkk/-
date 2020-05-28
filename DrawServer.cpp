@@ -1,15 +1,15 @@
 #include "DrawServer.h"
 
+DrawServer::DrawServer() {
+}
+
+DrawServer::~DrawServer() {
+	N = nullptr;
+	delete N;
+}
+
 int* DrawServer::getN() {
 	return N;
-}
-
-void DrawServer::setN(int a) {
-	*N = a;
-}
-
-char* DrawServer::getMass(int i) {
-	return Mass[i];
 }
 
 void DrawServer::changeMass(int* x, int* y, char* a) {

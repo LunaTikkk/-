@@ -17,6 +17,8 @@ ADDR::ADDR() {
 ADDR::~ADDR() {
 }
 
+//ADDR* ADDR::p_addr = 0;
+
 int ADDR::connection() {
 	//Присоединение к серверу
 	if (connect(newConnection, (SOCKADDR*)&addr, sizeofaddr) != 0) {
@@ -29,26 +31,10 @@ int ADDR::connection() {
 	}
 }
 
-int ADDR::receiving(char* a) {
-	if (recv(newConnection, a, sizeof(a), NULL)) {
-		//cout << "------\nReceiving n = " << *a << " = " << *a << endl;
-		//system("pause");
-		return 0;
-	}
-	else
-		return 1;
-}
-
-int ADDR::receivingint(int* a) {
+void ADDR::receivingint(int* a) {
 	char str[10];
-	if (recv(newConnection, str, sizeof(str), NULL)) {
-		*a = atoi(str);
-		//cout << "------\nReceiving n = " << *a << " = " << str << endl;
-		//system("pause");
-		return 0;
-	}
-	else
-		return 1;
+	recv(newConnection, str, sizeof(str), NULL);
+	*a = atoi(str);
 }
 
 void ADDR::sendingint(int a) {
@@ -57,12 +43,6 @@ void ADDR::sendingint(int a) {
 	//cout << "------\nSending n = " << buf << " = " << a << endl;
 	//system("pause");
 	send(newConnection, buf, sizeof(buf), NULL);
-}
-
-void ADDR::sending(char a) {
-	char A[5];
-	*A = a;
-	send(newConnection, A, sizeof(A), NULL); //Отправка сообщения клиенту
 }
 
 SOCKET ADDR::getConnect() {

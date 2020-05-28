@@ -1,6 +1,31 @@
 #include "Draw.h"
 
+Draw::Draw() {
+	//texture.loadFromFile("1.png");
+	//sprite.setTexture(texture);
+}
+
+Draw::~Draw() {
+	N = nullptr;
+	delete N;
+}
+
 void Draw::draw() {
+	/*
+	while (window.isOpen())
+	{
+		// Обрабатываем очередь событий в цикле
+		Event event;
+		while (window.pollEvent(event))
+		{
+			// Пользователь нажал на «крестик» и хочет закрыть окно?
+			if (event.type == Event::Closed)
+				// Тогда закрываем его
+				window.close();
+		}
+		//window.clear(Color::White);
+	*/
+
 	system("cls");
 	for (int i = 0; i < *N + 2; i++) {
 		if (i == 0 || i == *N + 1)
@@ -21,7 +46,6 @@ void Draw::draw() {
 		}
 		cout << endl;
 	}
-
 	cout << endl;
 }
 
